@@ -3,14 +3,11 @@ Materials to produce results for "Nearshore fish abundance in an urban estuary i
 
 This repository is divided into three folders:
 
-/analysis
-  - contains R scripts used to generate results and figures
+* `/analysis`: contains R scripts used to generate results and figures
     
-/data
-  - contains data used in the analysis R scripts
+* `/data`: contains data used in the analysis R scripts
     
-/figures
-  - contains image files generated in the analysis R scripts
+* `/figures`: contains image files generated in the analysis R scripts
 
 To replicate the results of this analysis, run the scripts in the analysis folder in numeric order. The purpose of each script is as follows:
 
