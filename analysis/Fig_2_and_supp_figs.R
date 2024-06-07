@@ -34,7 +34,7 @@ prep_df2 <- function(df) {
     mutate(month = as.numeric(month)) %>%
     expand_grid() %>% 
     slice(rep(1:n(), times = 4)) %>% 
-    mutate(species = rep(c("Chinook", "Chum", "Herring", "Surf Smelt"), each = 1222))
+    mutate(species = rep(c("Chinook", "Chum", "Herring", "Surf Smelt"), each = 1226))
   
   output <- df %>% 
     group_by(year, month, yday, site, ipa, station, species) %>%
@@ -132,10 +132,10 @@ CPUE_station_mo %>%
   theme_bw() +
   scale_color_manual(values = station_colors) +
   labs(x = "Month", y = "Catch per Set", color = "Station") +
-  theme(text = element_text(size=16)) +
+  theme(text = element_text(size=14)) +
   facet_wrap(~species, scales = "free_y")
 
- # ggsave("figures/Fig_S1.png", width = 169, height = 150, units = "mm")
+ # ggsave("figures/Fig_S1.png", width = 5.8, height = 5.67, units = "in")
 
 #### Supplement Figure S2 ####
 #difference in length between depth stations
@@ -147,10 +147,10 @@ net_target %>%
   facet_wrap(~species) +
   scale_fill_manual(values = station_colors) +
   theme_bw() +
-  theme(text = element_text(size=16)) +
+  theme(text = element_text(size=14)) +
   labs(x = "Depth Station", y = "Mean Length per Set (mm)")
 
-# ggsave("figures/Fig_S2.png")
+# ggsave("figures/Fig_S2.png", width = 5.98, height = 6.67, units = "in")
 
 #### Figure S3 ####
 #length over the season years lumped
@@ -161,7 +161,8 @@ net_target %>%
   geom_boxplot() +
   facet_wrap(~species, scales = "free_y") +
   theme_bw() +
-  theme(text = element_text(size=10)) +
+  theme(text = element_text(size=14),
+        axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   labs(x = "", y = "Mean Length per Set (mm)")
 
-# ggsave("figures/Fig_S3.png")
+ # ggsave("figures/Fig_S3.png", width = 5.8, height = 4.95, units = "in")

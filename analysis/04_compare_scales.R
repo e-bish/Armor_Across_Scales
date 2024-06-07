@@ -62,15 +62,17 @@ smelt_eff <- compare_armor_extent(net_list$smelt) %>%
 
 all_eff <- rbind(chinook_eff, chum_eff, herring_eff, smelt_eff) %>% 
   transform(species = factor(species, levels = c("Chinook", "Chum", 
-                                                 "Herring", "Surf Smelt")))
+                                                 "Herring", "Surf Smelt"))) %>% 
+  mutate(shape = ifelse(armor_extent %in% c("X500m", "X1.2km", "X10km"), "triangle", "circle")) 
 
 #### Figure 4 ####
 ggplot(all_eff, aes(x=factor(armor_extent, 
                              level = c("X100m", "X300m", "X500m", "X1.2km", "X3km", "X5km", "X7km", "X10km", "X15km", "X20km", "basin"),
                              label = c("100m", "300m", "500m", "1.2km", "3km", "5km", "7km", "10km", "15km", "20km", "basin")), 
-                    y=est, color = species)) + 
-  geom_point() +
+                    y=est, color = species, shape = shape)) + 
   geom_errorbar(aes(ymin=est-se, ymax=est+se), width=.3, linewidth = 1) +
+  geom_point(size = 3) +
+  scale_shape_manual(values = c(19,2)) +
   scale_color_manual(values = spp_colors) +
   theme_bw() +
   geom_hline(yintercept = 0, color = "grey27") +
@@ -82,4 +84,4 @@ ggplot(all_eff, aes(x=factor(armor_extent,
   facet_wrap(. ~ species, ncol = 2, scales = "free_y") 
 
 
- # ggsave("figures/Fig_4.png", width = 169, height = 120, units = "mm")  
+# ggsave("figures/Fig_4.png", width = 6.5, height = 4.61, units = "in")  

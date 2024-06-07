@@ -87,8 +87,7 @@ all.models %>%
        color = "Species") +
   scale_color_manual(values = spp_colors) +
   theme_classic() +
-  theme(text = element_text(size = 9))
+  theme(text = element_text(size = 10))
 
-# ggsave(here("figures", "Fig_S4.png"), width = 6, height = 4)
-
+# ggsave(here("figures", "Fig_S4.png"), width = 6.5, height = 4)
 

@@ -10,9 +10,9 @@ perc_armor <- here("data", "perc_armor.csv") %>%
                         levels = c("100m", "300m", "500m", "1.2km", 
                                    "3km", "5km", "7km", "10km", "15km", 
                                    "20km", "basin"))) %>% 
-  mutate(shape = ifelse(scale %in% c("500m", "1.2km", "10km"), "square", "circle"))
+  mutate(shape = ifelse(scale %in% c("500m", "1.2km", "10km"), "triangle", "circle"))
 
-str(perc_armor)
+
 perc_armor2 <- here("data", "perc_armor2.csv") %>% 
   read_csv() %>% 
   pivot_longer(cols = !site, 
@@ -22,7 +22,7 @@ perc_armor2 <- here("data", "perc_armor2.csv") %>%
                         levels = c("100m", "300m", "500m", "1.2km", 
                                    "3km", "5km", "7km", "10km", "15km", 
                                    "20km", "basin"))) %>% 
-  mutate(shape = ifelse(scale %in% c("500m", "1.2km", "10km"), "square", "circle"))
+  mutate(shape = ifelse(scale %in% c("500m", "1.2km", "10km"), "triangle", "circle")) 
 
 ## some stats
 perc_armor2 %>% 
@@ -46,9 +46,11 @@ perc_armor %>%
 ## the plot
 ggplot(data = perc_armor, 
        aes(x = scale, y =perc.armor, shape = shape)) + 
-  geom_point(color = "blue", size = 2.5) +
+  geom_point(size = 2.5, color = 
+              "blue") +
   geom_point(data = perc_armor2,
-             aes(x = scale, y =perc.armor,shape = shape), size = 2.5) +
+             aes(x = scale, y =perc.armor,shape = shape), size = 2.6) +
+  scale_shape_manual(values = c(19, 2)) +
   facet_wrap(~ factor(site,
                       levels = c("FAM", "TUR", "COR", "MA", "WA", "HO", "SHR", "DOK", "LL", "TL", "PR", "EDG"),
                       labels = c("Family Tides", "Turn Island", "Cornet Bay", "Maylor Point", "Waterman Preserve",
@@ -60,5 +62,5 @@ ggplot(data = perc_armor,
   xlab("Spatial Scale") +
   ylab("% of Shoreline with Armor")
 
-# ggsave("figures/manuscript/Figure_3.png", width = 169, height = 135, units = "mm")
+# ggsave("figures/Fig_3.png", width = 6.5, height = 5.19, units = "in")
 
