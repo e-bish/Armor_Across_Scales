@@ -26,24 +26,17 @@ compare_models <- function(df) {
   )
   
   #create a table to store model information and provide column names
-  model_form <- c("base", 
-                  "+ X500m", "+ X1.2km", "+ X10km",
-                  "+ shore type",  
-                  "+ X500m + shore type", "+ X1.2km + shore type", "+ X10km + shore type")
+  Modnames <- c("base", 
+                "+ X500m", "+ X1.2km", "+ X10km",
+                "+ shore type",  
+                "+ X500m + shore type", "+ X1.2km + shore type", "+ X10km + shore type")
   
-  mod.tab <- aictab(cand.set = model.list, modnames = model_form)
+  mod.tab <- aictab(cand.set = model.list, modnames = Modnames, second.ord = TRUE) #second.ord for AICc
   
-  mod.tab2 <- data.frame(model_form)
+  mod.tab2 <- data.frame(Modnames)
   
   # Define columns for storing values
-  mod.tab2$rest.eff <- mod.tab2$armored.eff <- mod.tab2$eff.size.se <- mod.tab2$eff.size  <- mod.tab$dAICc <- mod.tab$AICc <- NA
-  
-  for(i in 1:nrow(mod.tab)){
-    mod.tab2$AICc[i] <- round(AICc(model.list[[i]]),2)
-  }
-  
-  # Calculate delta AIC
-  mod.tab2$dAICc <- mod.tab2$AICc - min(mod.tab2$AICc)
+  mod.tab2$rest.eff <- mod.tab2$armored.eff <- mod.tab2$eff.size.se <- mod.tab2$eff.size <- NA
   
   # add effect size estimate
   for (i in c(2:4, 6:8)) {
@@ -51,23 +44,23 @@ compare_models <- function(df) {
     mod.tab2$eff.size[i] <- round(tmp$estimate[8], 2)
     mod.tab2$eff.size.se[i] <- round(tmp$std.error[8], 2)
   }
-
+  
   # add armored ipa effect size estimates
   for (i in 1:8) {
     tmp <- broom.mixed::tidy(model.list[[i]])
     mod.tab2$armored.eff[i] <- round(as.numeric(tmp[which(tmp$term == "ipaArmored"), "estimate"]), 2)
   }
-
+  
+  # add restored ipa effect size estimates
   for (i in 1:8) {
     tmp <- broom.mixed::tidy(model.list[[i]])
     mod.tab2$rest.eff[i] <- round(as.numeric(tmp[which(tmp$term == "ipaRestored"), "estimate"]), 2)
   }
   
-  mod.tab2 <- mod.tab2 %>% arrange(dAICc)
+  mod.output <- left_join(mod.tab, mod.tab2) %>% as.data.frame()
   
-  mod.tab <- cbind(mod.tab, mod.tab2[2:5])
-  
-  return(mod.tab)
+  return(mod.output)
+
 }
 
 ## summary stats - these are used in tables 1 & 2
