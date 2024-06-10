@@ -11,9 +11,9 @@ This repository is divided into three folders:
 
 To replicate the results of this analysis, run the scripts in the analysis folder in numeric order. The purpose of each script is as follows:
 
-**01_tidy_data** - loads raw data files, conducts some simple data cleaning, saves an Rdata object for use in other scripts
+**01_perc_armor_calc** - loads shapefiles to calculate the percent shoreline armor within different radii of fish sampling locations
 
-**02_perc_armor_calc** - loads shapefiles to calculate the percent shoreline armor within different radii of fish sampling locations
+**02_tidy_data** - loads raw data files, conducts some simple data cleaning, saves an Rdata object for use in other scripts
 
 **03_model_selection** - lists alternative models and compares results using AICc model selection
 
