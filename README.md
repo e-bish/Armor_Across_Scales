@@ -1,4 +1,4 @@
-# Armor_across_scales
+# Armor_Across_Scales
 Materials to produce results for "Nearshore fish abundance in an urban estuary is weakly associated with shoreline conditions across scales" by Emily E. Bishop, Timothy E. Essington, Jameal F. Samhouri, Blake E. Feist, Genoa H. Sullaway, Jason D. Toft, and Tessa B. Francis. 
 
 This repository is divided into three folders:
