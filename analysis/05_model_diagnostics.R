@@ -19,7 +19,7 @@ chum_mod <- glmmTMB(total ~ year + slogyday + slogyday2 + veg + ipa + (1|site), 
 herring_mod <- glmmTMB(total ~ year + slogyday + slogyday2 + veg + scale(X10km) + (1|site), data = net_list$herring, family = nbinom2)
 smelt_mod <- glmmTMB(total ~ year + slogyday + slogyday2 + veg + (1|site), data = net_list$smelt, family = nbinom2)
 
-
+## check residuals 
 check_residuals <- function(fittedModel) {
   simulationOutput <- simulateResiduals(fittedModel = fittedModel, plot = F)
   plot(simulationOutput)
@@ -30,7 +30,28 @@ check_residuals(chum_mod)
 check_residuals(herring_mod)
 check_residuals(smelt_mod)
 
+## check for zero inflation
 
+zi_check <- function() {
+  mod_list <- list(chinook = chinook_mod, chum = chum_mod, herring = herring_mod, smelt = smelt_mod)
+  resid_list <- lapply(mod_list, simulate_residuals)
+  zi_results <- lapply(resid_list, testZeroInflation)
+  
+  zi_df <- as.data.frame(matrix(nrow = 4, ncol = 2))
+  names(zi_df) <- c("species", "zi_ratio")
+  
+  zi_df[,1] <- names(mod_list)
+  
+  for (i in 1:length(mod_list)) {
+    zi_df[i,2] <- zi_results[[i]]$statistic
+  }
+  
+  return(zi_df)
+}
+
+zi_check()
+
+## summarize results
 chin <- broom.mixed::tidy(chinook_mod) %>% mutate(model = "Chinook")
 chu <- broom.mixed::tidy(chum_mod) %>%  mutate(model = "Chum")
 her <- broom.mixed::tidy(herring_mod) %>%  mutate(model = "Herring")
