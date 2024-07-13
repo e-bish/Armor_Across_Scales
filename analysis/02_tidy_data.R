@@ -1,6 +1,8 @@
 library(tidyverse)
 library(here)
 library(lubridate)
+library(GGally)
+
 
 #### Load data ####
 # all of the raw data were downloaded from the survey team's shared google drive and saved as csv files
@@ -129,6 +131,24 @@ net_list <- list(chinook = net_all %>%
                    filter(species == "Surf Smelt") %>% 
                    prep_df() %>% 
                    add_perc_armor())
+
+#test multicollinearity
+select_vars <- function (x) {
+  df <- x %>% 
+    select(year, slogyday, slogyday2, veg, ipa, X500m, X1.2km, X10km) %>% 
+    mutate(across(everything(), as.vector))
+  return(df)
+}
+
+chinook_vars <- select_vars(net_list$chinook)
+chum_vars <- select_vars(net_list$chum)
+herring_vars <- select_vars(net_list$herring)
+smelt_vars <- select_vars(net_list$smelt)
+
+ggpairs(chinook_vars)
+ggpairs(chum_vars)
+ggpairs(herring_vars)
+ggpairs(smelt_vars)
 
 save(net_list, file = here("data", "net_list.Rdata"))
 

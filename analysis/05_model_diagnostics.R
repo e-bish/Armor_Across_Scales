@@ -2,6 +2,7 @@ library(tidyverse)
 library(here)
 library(glmmTMB)
 library(DHARMa)
+library(performance)
 library(dotwhisker)
 library(PNWColors)
 library(sjPlot)
@@ -50,6 +51,12 @@ zi_check <- function() {
 }
 
 zi_check()
+
+#check for multicollinearity
+check_collinearity(chinook_mod)
+check_collinearity(chum_mod)
+check_collinearity(herring_mod)
+check_collinearity(smelt_mod)
 
 ## summarize results
 chin <- broom.mixed::tidy(chinook_mod) %>% mutate(model = "Chinook")
