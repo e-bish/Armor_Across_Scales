@@ -69,6 +69,9 @@ compare_models(net_list$chum)
 compare_models(net_list$herring)
 compare_models(net_list$smelt)
 
+## inspect effect sizes for shoreline type parameter in candidate herring model
+summary(glmmTMB(total ~ year + slogyday + slogyday2 + veg + scale(X10km) + ipa + (1|site), data = net_list$herring, family = nbinom2))
+
 ## inspect effect sizes for shoreline type parameter in "best" chum model
 summary(glmmTMB(total ~ year + slogyday + slogyday2 + veg + ipa + (1|site), data = net_list$chum, family = nbinom2))
 
