@@ -23,3 +23,4 @@ To replicate the results of this analysis, run the scripts in the analysis folde
 
 There are also scripts to generate figures within the manuscript, labeled with the prefix "Fig". Finally, there is a script to generate the numbers used to describe the percent of shoreline armor that salmon might encounter on the east side of the US waters of the Salish Sea as used in an example in the discussion. 
 
+The 01_perc_armor_calc file uses data from the Beach Strategies database. Additional information about this data source and links to download the data directly can be found [here](https://beach-strategies-wdfw-hub.hub.arcgis.com/). 
