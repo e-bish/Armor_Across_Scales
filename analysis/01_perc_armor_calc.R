@@ -31,13 +31,14 @@ SOS_sites <- here("data","spatial_data","reupdatingthearmoringgeodatabase", "Sho
                           Site_name == "Edgewater Beach" ~ "EDG",
                           Site_name == "Family Tides" ~ "FAM",
                           Site_name == "Seahurst Park" ~ "SHR", 
-                          Site_name == "Turn Island" ~ "TUR",
+                          Site_name == "Turn Island" ~ "TUR", #note that TUR restored is actually a second natural shoreline
                           Site_name == "Lost Lake" ~ "LL",
                           Site_name == "Titlow Park" ~ "TL",
                           Site_name == "Penrose Point" ~ "PR",
                           Site_name == "Waterman Shoreline Preserve" ~ "WA" ,
                           Site_name == "Howarth Park" ~ "HO" ,
                           Site_name == "Maylor Point" ~ "MA"), .after = "Site_name")
+
 # map it!
 # map <- ggplot() +
 #   geom_sf(data = shoreline) +
