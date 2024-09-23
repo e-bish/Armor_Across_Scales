@@ -4,6 +4,8 @@ library(sf)
 library(spData)
 library(ggspatial)
 library(cowplot)
+
+# devtools::install_github("yutannihilation/ggsflabel")
 library(ggsflabel)
 
 
@@ -75,55 +77,59 @@ SOS_sites <- here("data","spatial_data","reupdatingthearmoringgeodatabase","Shor
 bbox <- st_bbox(SOS_sites)
 
 inset <- ggplot() +
-  geom_sf(data = us_states, fill = "white") +
+  geom_sf(data = us_states, fill = "grey70") +
   geom_sf(data = bbox %>% st_as_sfc(), fill = "red", 
           color = "red", linewidth = 1, alpha = 0.4) +
   coord_sf(xlim = c(-124.5, -114), ylim = c(32.5, 49)) + 
   theme_void() +
-  theme(panel.background = element_rect(fill = "grey70"),
+  theme(panel.background = element_rect(fill = "white"),
         panel.border = element_rect(color = "black", 
                                     fill=NA, linewidth = 1.5)) 
 
 #### create the main plot ####
+#commented out values work well on some computers
 p1 <- ggplot() + 
-  geom_sf(data = shoreline, fill = "white", color = "black") + 
+  geom_sf(data = shoreline, fill = "grey70", color = "black") + 
   geom_sf(data = PSNERPbasins, fill = "transparent", color = "grey40") +
   geom_sf(data = SOS_sites,
-          aes(color = veg, fill = veg), pch = 18, size = 7) +
+          aes(color = veg, fill = veg), pch = 18, size = 6) + #size = 7
   scale_color_manual(values = c("black", "chartreuse4")) +
-  geom_sf_text(data = PSNERPcentroids1, aes(label = Basin), size = 3, fontface = "italic", color = "grey40",
-               hjust = c(0.7,0.5,3.5,1.5,-1), #left to right
-               vjust = c(0.3,1,2.2,1,1.8)) +
-  geom_sf_text_repel(data = PSNERPcentroids2, aes(label = Basin), size = 3, fontface = "italic", color = "grey40",
+  geom_sf_text(data = PSNERPcentroids1, aes(label = Basin), size = 2.5, fontface = "italic", color = "grey30",
+               hjust = c(0.8,0.5,3.25,1.5,-.75), #left to right #c(0.7,0.5,3.5,1.5,-1)
+               vjust = c(0.3,0.5,2.2,1,1.8)) + #c(0.3,1,2.2,1,1.8)) 
+  geom_sf_text_repel(data = PSNERPcentroids2, aes(label = Basin), size = 2.5, fontface = "italic", color = "grey30", #size = 3
                      nudge_x = ifelse(PSNERPcentroids2$SUBBASIN == "SJ", -0.3, -.25),
                      nudge_y = ifelse(PSNERPcentroids2$SUBBASIN == "SJ", -0.05, 0.06)) +
   geom_sf_label_repel(data = SOS_sites,
                       aes(x = lon, y = lat, label = site),
-                      force = 5, force_pull = 5, size = 6) +
+                      force = 5, force_pull = 5, size = 5) + #size = 6
   theme_void() +
   coord_sf(xlim = c(-123.5, -121.8), ylim = c(46.98, 48.7),
            crs = 4326, expand = FALSE) +
-  theme(panel.background = element_rect(fill = "grey70"),
+  theme(panel.background = element_rect(fill = "white"), 
         legend.position = "none",
         panel.border = element_rect(color = "black", 
                                     fill=NA, linewidth = 1.5),
         text = element_text(size = 9)) +
-  annotation_scale(location = "br", style = "ticks") + 
+  annotation_scale(location = "br", style = "ticks", height = unit(0.20, "cm"),) + #0.25
   annotation_north_arrow(location = "br", which_north = "true",
-                         height = unit(1.5, "cm"), 
+                         height = unit(1.5, "cm"),
                          pad_y = unit(.6, "cm"),
-                         pad_x = unit(0.5, "cm"),
-                         style = north_arrow_fancy_orienteering); p1
+                         pad_x = unit(0.3, "cm"), #0.5
+                         style = north_arrow_fancy_orienteering)
 
 ggdraw() + 
   draw_plot(p1) + 
-  draw_plot(inset, x = 0.62, y = 0.69, 
+  draw_plot(inset, x = 0.67, y = 0.69, # x = 0.62, y = 0.69, 
             width = 0.3, height = 0.3)
 
 #### save results ####
 
-# ggsave("figures/Fig_1.png", width = 81, height = 100, units = "mm")  #looks terrible in plot but ok in saved version
-# ggsave("figures/Fig_1.tiff", width = 81, height = 100, units = "mm", dpi = 600)  #looks terrible in plot but ok in saved version
+ggsave("figures/Fig_1.tiff", 
+       width = 98, 
+       height = 130, 
+       units = "mm", 
+       device = "tiff", dpi = 600)  
 
 
 
