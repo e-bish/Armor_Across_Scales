@@ -145,6 +145,8 @@ chum_vars <- select_vars(net_list$chum)
 herring_vars <- select_vars(net_list$herring)
 smelt_vars <- select_vars(net_list$smelt)
 
+#check for multicollinearity. We expect day of year to be correlated with day of year squared (it's convention to include both) 
+#and it's no problem for the armoring variables to be correlated because they are ever used in the same model
 ggpairs(chinook_vars)
 ggpairs(chum_vars)
 ggpairs(herring_vars)
