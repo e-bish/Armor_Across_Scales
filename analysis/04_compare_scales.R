@@ -84,4 +84,4 @@ ggplot(all_eff, aes(x=factor(armor_extent,
   facet_wrap(. ~ species, ncol = 2, scales = "free_y") 
 
 
-# ggsave("figures/Fig_4.png", width = 6.5, height = 4.61, units = "in")  
+# ggsave("figures/Fig_4.tiff", width = 6.5, height = 4.61, units = "in")  

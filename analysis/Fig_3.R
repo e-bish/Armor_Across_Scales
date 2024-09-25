@@ -62,5 +62,5 @@ ggplot(data = perc_armor,
   xlab("Spatial Scale") +
   ylab("% of Shoreline with Armor")
 
-# ggsave("figures/Fig_3.png", width = 6.5, height = 5.19, units = "in")
+# ggsave("figures/Fig_3.tiff", width = 6.5, height = 5.19, units = "in")
 
