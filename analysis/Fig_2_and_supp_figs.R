@@ -4,7 +4,7 @@ library(PNWColors)
 library(patchwork)
 
 #load the tidy fish data
-here("analysis", "01_tidy_data.R") %>% source()
+here("analysis", "02_tidy_data.R") %>% source()
 
 #### set plot colors ####
 station_colors <- pnw_palette("Bay", 8)[c(8,5,1)]
@@ -112,7 +112,7 @@ ff_site_cpue <- CPUE_site %>%
   plot_layout(guides = 'collect') +
   plot_annotation(tag_levels = 'A')
 
-# ggsave("figures/Fig_2.png", width = 169, height = 135, units = "mm")
+# ggsave("figures/Fig_2.tiff", width = 169, height = 135, units = "mm")
 
 #### Supplement Figure S1 ####
 CPUE_station_mo <- target_counts %>% 
@@ -135,7 +135,7 @@ CPUE_station_mo %>%
   theme(text = element_text(size=14)) +
   facet_wrap(~species, scales = "free_y")
 
- # ggsave("figures/Fig_S1.png", width = 5.8, height = 5.67, units = "in")
+# ggsave("figures/Fig_S1.tiff", width = 5.8, height = 5.67, units = "in")
 
 #### Supplement Figure S2 ####
 #difference in length between depth stations
@@ -150,7 +150,7 @@ net_target %>%
   theme(text = element_text(size=14)) +
   labs(x = "Depth Station", y = "Mean Length per Set (mm)")
 
-# ggsave("figures/Fig_S2.png", width = 5.98, height = 6.67, units = "in")
+# ggsave("figures/Fig_S2.tiff", width = 5.98, height = 6.67, units = "in")
 
 #### Figure S3 ####
 #length over the season years lumped
@@ -165,4 +165,4 @@ net_target %>%
         axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
   labs(x = "", y = "Mean Length per Set (mm)")
 
- # ggsave("figures/Fig_S3.png", width = 5.8, height = 4.95, units = "in")
+# ggsave("figures/Fig_S3.tiff", width = 5.8, height = 4.95, units = "in")
