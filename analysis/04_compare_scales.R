@@ -49,10 +49,10 @@ compare_armor_extent <- function(df) {
 
 #create a separate data frame with effect sizes for each scale:species
 chinook_eff <- compare_armor_extent(net_list$chinook) %>% 
-  mutate(species = "Chinook")
+  mutate(species = "Chinook salmon")
 
 chum_eff <- compare_armor_extent(net_list$chum) %>% 
-  mutate(species = "Chum")
+  mutate(species = "Chum salmon")
 
 herring_eff <- compare_armor_extent(net_list$herring) %>% 
   mutate(species = "Herring")
@@ -61,7 +61,7 @@ smelt_eff <- compare_armor_extent(net_list$smelt) %>%
   mutate(species = "Surf Smelt")
 
 all_eff <- rbind(chinook_eff, chum_eff, herring_eff, smelt_eff) %>% 
-  transform(species = factor(species, levels = c("Chinook", "Chum", 
+  transform(species = factor(species, levels = c("Chinook salmon", "Chum salmon", 
                                                  "Herring", "Surf Smelt"))) %>% 
   mutate(shape = ifelse(armor_extent %in% c("X500m", "X1.2km", "X10km"), "triangle", "circle")) 
 
