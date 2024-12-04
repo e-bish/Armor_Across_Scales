@@ -94,7 +94,7 @@ sal_site_cpue <- CPUE_site %>%
   filter(tax_group == "Salmon") %>% 
   ggplot() +
   geom_boxplot(aes(x = site, y = CPUE, fill = species)) +
-  scale_fill_manual(values = spp_colors[1:2], ) +
+  scale_fill_manual(values = spp_colors[1:2], labels = c("Chinook salmon", "Chum salmon")) +
   theme_classic() + 
   labs(x = "", y = "Abundance", fill = "Species") + 
   theme(text = element_text(size=9))
