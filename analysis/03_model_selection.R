@@ -8,7 +8,7 @@ library(gtExtras)
 library(lmtest)
 
 #load the tidy fish data
-load(here("data", "net_list.Rdata")) # or here("analysis", "01_tidy_data.R") %>% source()
+load(here("data", "net_list.Rdata")) # or here("analysis", "02_tidy_data.R") %>% source()
 
 
 compare_models <- function(df) {

@@ -5,7 +5,7 @@ library(scales)
 library(PNWColors)
 
 #load the tidy fish data
-load(here("data", "net_list.Rdata")) # or here("analysis", "01_tidy_data.R") %>% source()
+load(here("data", "net_list.Rdata")) # or here("analysis", "02_tidy_data.R") %>% source()
 
 spp_colors <- c(pnw_palette("Starfish",7)[2], 
                 pnw_palette("Lake",8)[6], 
