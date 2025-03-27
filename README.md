@@ -1,5 +1,13 @@
 # Armor_Across_Scales
-Materials to produce results for "Nearshore fish abundance in an urban estuary is weakly associated with shoreline conditions across scales" by Emily E. Bishop, Timothy E. Essington, Jameal F. Samhouri, Blake E. Feist, Genoa H. Sullaway, Jason D. Toft, and Tessa B. Francis. 
+
+A repo to store results related to [Bishop et al. 2024](https://www.int-res.com/abstracts/meps/v750/p105-118/)
+
+Bishop, E. E., Essington, T. E., Samhouri, J. F., Feist, B. E., Sullaway, G. H., Toft, J. D., & Francis, T. B. (2024). Nearshore fish abundance in an urban estuary is weakly associated with shoreline conditions across spatial scales. Marine Ecology Progress Series, 750, 105-118.
+
+## Abstract
+Understanding the scale at which species respond to habitat characteristics can improve detection of effects from anthropogenic alterations to marine shorelines. Spatial context matters because habitat alteration may have more of an effect when prevalent throughout a region, depending on the spatial scale at which species experience changes in habitat value. In this study, we examined the associations of 4 highly motile fish species with shorelines that are altered via shoreline armor. We sampled fish for 4 yr in the Salish Sea, Washington, USA, and used model selection to evaluate the weight of evidence for associations between fish abundance and shoreline armor extent within hierarchically nested spatial scales. We evaluated species that inhabit nearshore waters under different contexts during their life histories because we expected different associations with armor between them. Of the species that are beach-associated at multiple times during their life histories, surf smelt showed no association with armor while Pacific herring showed a negative association, particularly at larger spatial scales. Of the species that pass through nearshore habitats during outmigration to the ocean, juvenile Chinook and chum salmon both showed slightly positive associations with armor presence, but these associations were not strong. The stronger association we observed in herring suggests that they may avoid areas with greater armor presence throughout a region. Distributions of anadromous species during migration are likely governed by other factors. This work highlights the importance of maintaining ecological context when considering future research aimed at understanding the impacts of shoreline armor on fish populations.
+
+## File structure
 
 This repository is divided into three folders:
 
